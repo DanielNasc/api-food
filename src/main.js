@@ -9,7 +9,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(foodsRouter)
+app.use("/api", foodsRouter)
 
 async function main() {
     await mongoose.connect(process.env.MONGO_URL)

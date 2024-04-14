@@ -6,8 +6,18 @@ export class FoodsController {
     }
 
     async create(req, res) {
-        const food = req.body;
-        await this.foodService.create(food);
+        const {
+            name, category, quantity,
+            expirationDate, price
+        } = req.body;
+
+        if (!name || !category, !quantity, !expirationDate, isNaN(price)) 
+            return res.status(400).json({ "message": "missing data" })
+
+        await this.foodService.create({
+            name, category, quantity,
+            expirationDate, price
+        });
         res.sendStatus(201);
     }
 
