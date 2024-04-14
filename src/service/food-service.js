@@ -1,7 +1,9 @@
 import { FoodsRepository } from "../repositories/foods-repository.js";
 
 export class FoodService {
-    foodsRepository = new FoodsRepository();
+    constructor() {
+        this.foodsRepository = new FoodsRepository();
+    }
     
     async create(food) {
         await this.foodsRepository.create(food);

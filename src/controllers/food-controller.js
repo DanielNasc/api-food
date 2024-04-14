@@ -1,7 +1,9 @@
 import { FoodService } from "../service/food-service.js";
 
 export class FoodsController {
-    foodService = new FoodService();
+    constructor() {
+        this.foodService = new FoodService()
+    }
 
     async create(req, res) {
         const food = req.body;

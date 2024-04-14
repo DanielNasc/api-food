@@ -1,24 +1,49 @@
+import { Food } from "../model/food.js";
+
 export class FoodsRepository {
-    static foods = [];
-
-    static async create(food) {
-        FoodsRepository.foods.push(food);
+    async create(foodData) {
+      try {
+        const newFood = new Food(foodData);
+        const savedFood = await newFood.save();
+        return savedFood;
+      } catch (error) {
+        throw error;
+      }
     }
-
-    static async findAll() {
-        return FoodsRepository.foods;
+  
+    async findAll() {
+      try {
+        const allFoods = await Food.find();
+        return allFoods;
+      } catch (error) {
+        throw error;
+      }
     }
-
-    static async findById(id) {
-        return FoodsRepository.foods.find(food => food.id === id);
+  
+    async findById(id) {
+      try {
+        const food = await Food.findById(id);
+        return food;
+      } catch (error) {
+        throw error;
+      }
     }
-
-    static async update(id, food) {
-        const index = FoodsRepository.foods.findIndex(food => food.id === id);
-        FoodsRepository.foods[index] = food;
+  
+    async update(id, foodData) {
+      try {
+        const updatedFood = await Food.findByIdAndUpdate(id, foodData, { new: true });
+        return updatedFood;
+      } catch (error) {
+        throw error;
+      }
     }
-
-    static async delete(id) {
-        FoodsRepository.foods = FoodsRepository.foods.filter(food => food.id !== id);
+  
+    async delete(id) {
+      try {
+        await Food.findByIdAndDelete(id);
+      } catch (error) {
+        throw error;
+      }
     }
-}
+  }
+  

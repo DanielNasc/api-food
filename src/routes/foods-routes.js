@@ -1,14 +1,13 @@
 import { Router } from "express"
 import { FoodsController } from "../controllers/food-controller.js"
 
-const foodsRouter = Router()
-
+const foodsRouter = new Router()
 const foodsController = new FoodsController()
 
-foodsRouter.post('/foods', foodsController.create)
-foodsRouter.get('/foods', foodsController.findAll)
-foodsRouter.get('/foods/:id', foodsController.findById)
-foodsRouter.put('/foods/:id', foodsController.update)
-foodsRouter.delete('/foods/:id', foodsController.delete)
+foodsRouter.post('/foods', (req, res) => foodsController.create(req, res))
+foodsRouter.get('/foods', (req, res) => foodsController.findAll(req, res))
+foodsRouter.get('/foods/:id', (req, res) => foodsController.findById(req, res))
+foodsRouter.put('/foods/:id', (req, res) => foodsController.update(req, res))
+foodsRouter.delete('/foods/:id', (req, res) => foodsController.delete(req, res))
 
 export { foodsRouter }
